@@ -10,6 +10,5 @@ abstract public class List<T> {
     Boolean insert(T value, int pos){return false;}
     Boolean delete(int pos){return false;}
     T getValue(int pos){return null;}
-    Boolean setValue(T value, int pos){return false;}
-    int getPos(T value){return 0;}
+    int getPos(T value){return -1;}
 }

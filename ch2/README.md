@@ -14,7 +14,7 @@
 * 需要经常对线性表按位置进行访问，并且需要安慰读操作比插入/删除操作频繁时，不适宜使用链表进行实现。
 * 指针所占空间比较大时，要慎重使用链表。
 
-### 习题
+### Page45 习题
 
 #### 1、方法1：从头开始扫描
 
@@ -61,6 +61,56 @@ Boolean insert(T x) {
     return flag;
 }
 ```
+
+### 习题2：
+
+```java
+int compare(T[] A, T[] B) {
+    //找到第一个不同的元素
+    int index = 0;
+    int compare = 0;
+    while((index < A.length) && (index < B.length) && (A[index] == B[index]))
+        index++;
+    if((index == A.length) && (index == B.length)) {
+        compare = 0;
+    }else {
+        if(index > B.length){
+            compare = 1;
+        }else if(index > A.length) {
+            compare = -1;
+        }else if(A[index] > B[index]) {
+            compare = 1;
+        }else {
+            compare = -1;
+        }
+    }
+    return compare;
+}
+```
+
+### 习题3：
+
+```java
+Boolean rangeDelete(int min, int max) {
+    LinkNode pre = first;
+    LinkNode cur = first.getNext();
+    //找到min
+    while(cur.getData.value >= min) {
+        pre = cur;
+        cur = cur.getNext();
+    }
+    //找到max
+    while(cur.getData.value <= max) {
+        cur = cur.getNext();
+    }
+    pre.setNext(cur.getNext());
+    return true;
+}
+```
+
+
+
+
 
 
 

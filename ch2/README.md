@@ -108,7 +108,39 @@ Boolean rangeDelete(int min, int max) {
 }
 ```
 
+### 习题4：两个递增的链表合并为递增的链表
 
+```java
+LinkList mergeLinkList(LinkList A, LinkList B) {
+    //头节点
+    LinkNode node_c = new LinkNode(null, null);
+    LinkNode node_a = A.first.getNext();
+    LinkNode node_b = B.first.getNext();
+
+    while((node_a.getNext() != null) && (node_b.getNext() != null)) {
+        if(node_a.getData() < node_b.getData()) {
+            node_c = node_a;
+            node_a = node_a.getNext();
+        }else if(node_a.getData() > node_b.getData()){
+            node_c = node_b;
+            node_b = node_b.getNext();
+        }else {
+            node_c = node_a;
+            node_c.setNext(node_b.getNext());
+            node_b = node_b.getNext();
+        }
+    }
+    //剩余段
+    if(node_a.getNext() != null) {
+        node_c.setNext(node_a);
+    }else {
+        node_c.setNext(node_b);
+    }
+    LinkList list = new LinkList(node_c);
+    return list;
+
+}
+```
 
 
 

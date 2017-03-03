@@ -16,7 +16,7 @@
 
 ### 习题
 
-#### 1、方法1：
+#### 1、方法1：从头开始扫描
 
 ```java
 Boolean insert(T x) {
@@ -25,13 +25,42 @@ Boolean insert(T x) {
     if((curLen + 1) > maxSize) {
         flag = false;
     }else {
-        
+        int index = 0;
+        while(x.value > a[index].value) {
+            index++;
+        }
+        for(int i = curLen; i > index; i--) {
+            a[i] = a[i - 1];
+        }
+        curLen += 1;
+        a[index] = x;
+        flag = true;
     }
+    return flag;
 }
 ```
 
+#### 方法2：从尾部开始扫描
 
-
+```java
+Boolean insert(T x) {
+    Boolean flag = false;
+    //边界条件
+    if((curLen +1) > maxSize) {
+        flag = false;
+    }else {
+        int index = curLen - 1;
+        while(x.value < a[index].value) {
+            a[index+1] = a[index];
+            index--;
+        }
+        curLen += 1;
+        a[index] = x;
+        flag = true;
+    }
+    return flag;
+}
+```
 
 
 

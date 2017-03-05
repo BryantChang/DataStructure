@@ -15,6 +15,17 @@ public class LinkList<T>  extends List<T>{
         curLen = 0;
     }
 
+    public LinkList(LinkNode<T> first, int curLen) {
+        this.first = new LinkNode(null, first.getNext());
+        current = new LinkNode<T>(null, null);
+        current = first;
+        this.curLen = curLen;
+    }
+
+    public LinkNode<T> getFirst() {
+        return first;
+    }
+
     @Override
     Boolean isEmpty() {
         return (curLen == 0);
@@ -41,7 +52,7 @@ public class LinkList<T>  extends List<T>{
         current = node;
         curLen += 1;
         flag = true;
-        printLength();
+//        printLength();
         return flag;
     }
 
@@ -99,7 +110,7 @@ public class LinkList<T>  extends List<T>{
 
     @Override
     T getValue(int pos) {
-        System.out.println(pos);
+//        System.out.println("pos: " + pos);
         //边界条件
         T res = null;
         if(pos < 0 || pos > curLen) {
@@ -137,5 +148,33 @@ public class LinkList<T>  extends List<T>{
             }
         }
         return pos;
+    }
+
+
+    LinkList<T> reserve(LinkList<T> other) {
+        LinkNode first = other.getFirst();
+        LinkNode p1, p2, p3;
+        p1 = first.getNext();
+        LinkList list = null;
+        if(p1 == null) {
+            //空链表
+            list = null;
+        }else {
+            p2 = p1.getNext();
+            if(p2 == null) {
+                //一个节点时和原链表一样
+                list = other;
+            }else {
+                while(p2 != null) {
+                    p3 = p2.getNext();
+                    p2.setNext(p1);
+                    p1 = p2;
+                    p2 = p3;
+                }
+                LinkNode head_new = new LinkNode(null, p1);
+                list = new LinkList(head_new, other.length());
+            }
+        }
+        return list;
     }
 }

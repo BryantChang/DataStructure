@@ -142,6 +142,51 @@ LinkList mergeLinkList(LinkList A, LinkList B) {
 }
 ```
 
+### 习题6：删除顺序表中i开始的k个元素
+
+```java
+Boolean rangeDelete(int i, int k) {
+    Boolean flag = false;
+    //边界条件
+    if(i+k > curLen) {
+        flag = false;
+    }else {
+        for(int j = i+k; j < curLen; j++) {
+            arr[j-k] = arr[j];
+        }
+        flag = true;
+    }
+    return flag;
+}
+```
+
+### 习题8：求两个顺序表的交集
+
+```java
+ArrayList interSection(ArrayList list_a, ArrayList list_b) {
+    ArrayList list_c = new ArrayList();
+    int index_a = 0;
+    int index_b = 0;
+    for (index_a = 0; index_a < list_a.size(); index_a++) {
+        if(list_a.get(index_a) < list_b.get(index_b)) {
+            continue;
+        }else if(list_a.get(index_a) > list_b.get(index_b)) {
+            index_b++;
+            index_a--;//保留当前的index_a
+        }else if(list_a.get(index_a) == list_b.get(index_b)){
+            list_c.add(list_a.get(index_a));
+        }
+    }
+    return list_c;
+}
+```
+
+
+
+
+
+
+
 
 
 

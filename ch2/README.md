@@ -162,6 +162,8 @@ Boolean rangeDelete(int i, int k) {
 
 ### 习题8：求两个顺序表的交集
 
+#### 顺序表
+
 ```java
 ArrayList interSection(ArrayList list_a, ArrayList list_b) {
     ArrayList list_c = new ArrayList();
@@ -181,9 +183,66 @@ ArrayList interSection(ArrayList list_a, ArrayList list_b) {
 }
 ```
 
+#### 链表
 
+```java
+LinkList interSection(LinkList list_a, LinkList list_b) {
+    LinkNode list_a_cur = list_a.getFirst().getNext();
+    LinkNode list_b_cur = list_b.getFirst().getNext();
 
+    LinkNode list_c_cur = new LinkNode(null, null);
+    LinkNode list_c_head = new LinkNode(null, null);
+    list_c_cur = list_c_head;
+    int count = 0;
+    while(list_a_cur.getNext() != null) {
+        if(list_a_cur.getData() < list_b_cur.getData()) {
+            list_a_cur = list_a_cur.getNext();
+            continue;
+        }else if(list_a_cur.getData() > list_b_cur.getData()) {
+            list_b_cur = list_b_cur.getNext();
+            continue;
+        }else {
+            LinkNode node = new LinkNode(list_a_cur.getData(), null);
+            list_c_cur.setNext(node);
+            list_c_cur = list_c_cur.getNext();
+            count++;
+        }
+    }
+    LinkList list_c = new LinkList(list_c_head, count);
+    return list_c;
+}
+```
 
+### 上机1：倒置链表
+
+```java
+LinkList<T> reserve(LinkList<T> other) {
+    LinkNode first = other.getFirst();
+    LinkNode p1, p2, p3;
+    p1 = first.getNext();
+    LinkList list = null;
+    if(p1 == null) {
+        //空链表
+        list = null;
+    }else {
+        p2 = p1.getNext();
+        if(p2 == null) {
+            //一个节点时和原链表一样
+            list = other;
+        }else {
+            while(p2 != null) {
+                p3 = p2.getNext();
+                p2.setNext(p1);
+                p1 = p2;
+                p2 = p3;
+            }
+            LinkNode head_new = new LinkNode(null, p1);
+            list = new LinkList(head_new, other.length());
+        }
+    }
+    return list;
+}
+```
 
 
 

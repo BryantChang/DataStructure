@@ -34,3 +34,57 @@ public class Remove {
     }
 }
 ```
+
+
+### 编写代码，以给定值x为基准将链表分割成两部分，所有小于x的结点排在大于或等于x的结点之前,给定一个链表的头指针 ListNode* pHead，请返回重新排列后的链表的头指针。注意：分割以后保持原来的数据顺序不变。
+
+```
+解题思路：本题的思路主要是借鉴了链表的尾插法进行，使用两个头结点分别作为大于x的和小于x的链表，最终把两个链表进行连接。
+```
+
+```java
+import java.util.*;
+
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Partition {
+    public ListNode partition(ListNode pHead, int x) {
+        // write code here
+        ListNode smallHead = new ListNode(0);
+        ListNode bigHead = new ListNode(0);
+        ListNode small = new ListNode(0);
+        ListNode big = new ListNode(0);
+        small = smallHead;
+        big = bigHead;
+
+        //空链表或只有一个节点
+        if(pHead == null || pHead.next == null) {
+            return pHead;
+        }else {
+            while(pHead != null) {
+                if(pHead.val < x) {
+                    small.next = pHead;
+                    pHead = pHead.next;
+                }else{
+                    big.next = pHead;
+                    pHead = pHead.next;
+                }
+            }
+            big.next = null;
+            small.next = bigHead.next;
+            return smallHead.next;
+        }
+    }
+}
+```
+
+
+
+

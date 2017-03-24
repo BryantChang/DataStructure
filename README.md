@@ -85,6 +85,60 @@ public class Partition {
 }
 ```
 
+### 3、有两个用链表表示的整数，每个结点包含一个数位。这些数位是反向存放的，也就是个位排在链表的首部。编写函数对这两个整数求和，并用链表形式返回结果。给定两个链表ListNode* A，ListNode* B，请返回A+B的结果(ListNode*)。
+
+```
+基本思路：本文可以作为大数加法的基本思路，主要根据加法的特点，生成链表节点时主要是根据进位情况和是否遍历完A和B所表示的链表来确定。
+```
+
+```java
+import java.util.*;
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Plus {
+    public ListNode plusAB(ListNode a, ListNode b) {
+        // write code here
+        //进位位
+        int c = 0;
+        int sum = 0;
+        //两个游标节点
+        ListNode newHead = new ListNode(-1);
+        ListNode pc = new ListNode(-1);
+        pc = newHead;
+        ListNode pa = new ListNode(-1);
+        ListNode pb = new ListNode(-1);
+        pa = a;
+        pb = b;
+        //生成链表节点终止条件
+        while(pa != null || pb != null || c != 0) {
+            int val1 = (pa == null ? 0 : pa.val);
+            int val2 = (pb == null ? 0 : pb.val);
+
+            sum = val1 + val2 + c;
+            //进位
+            c = sum / 10;
+            //生成加法当前数位的节点
+            ListNode node = new ListNode(sum%10);
+            pc.next = node;
+            pc = pc.next;
+            //指针同时向后移
+            pa = (pa == null ? null : pa.next);
+            pb = (pb == null ? null : pb.next);
+
+        }
+        pc.next = null;
+        return newHead.next;
+    }
+}
+```
+
 
 
 

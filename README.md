@@ -1,1 +1,24 @@
-# 《数据结构预算法 清华大学出版社》习题及核心部分代码
+# 牛客网数据结构练习题
+
+### 1、实现一个算法，删除单向链表中间的某个结点，假定你只能访问该结点。给定带删除的节点，请执行删除操作，若该节点为尾节点，返回false，否则返回true
+
+```java
+import java.util.*;
+ 
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+ 
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+*/
+public class Remove {
+    public boolean removeNode(ListNode pNode) {
+        // write code here
+        
+    }
+}
+```

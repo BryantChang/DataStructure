@@ -105,17 +105,16 @@ public class ListNode {
 public class Plus {
     public ListNode plusAB(ListNode a, ListNode b) {
         // write code here
-        //进位位
-        int c = 0;
+       int c = 0;
         int sum = 0;
         //两个游标节点
-        ListNode newHead = new ListNode(-1);
-        ListNode pc = new ListNode(-1);
-        pc = newHead;
+        ListNode head = new ListNode(-1);
+        ListNode p = new ListNode(-1);
         ListNode pa = new ListNode(-1);
         ListNode pb = new ListNode(-1);
         pa = a;
         pb = b;
+        p = head;
         //生成链表节点终止条件
         while(pa != null || pb != null || c != 0) {
             int val1 = (pa == null ? 0 : pa.val);
@@ -126,18 +125,70 @@ public class Plus {
             c = sum / 10;
             //生成加法当前数位的节点
             ListNode node = new ListNode(sum%10);
-            pc.next = node;
-            pc = pc.next;
+            p.next = node;
+            p = p.next;
             //指针同时向后移
             pa = (pa == null ? null : pa.next);
             pb = (pb == null ? null : pb.next);
 
         }
-        pc.next = null;
-        return newHead.next;
+        return head.next;
     }
 }
 ```
+
+### 4、请编写一个函数，检查链表是否为回文。给定一个链表ListNode* pHead，请返回一个bool，代表链表是否为回文。
+
+```
+解题思路：将链表的前半部分入栈，使用快慢指针的方式筛选出链表的前半部分元素。然后从对称轴的后一个元素开始遍历，和每一个出栈的元素对比，如果全部相等说明是回文，否则中间出现任何不相等的现象则返回false
+```
+
+```java
+import java.util.*;
+
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Palindrome {
+    public boolean isPalindrome(ListNode pHead) {
+        // write code here
+        Stack<Integer> stack = new Stack<Integer>();
+        ListNode slow = new ListNode(-1);
+        ListNode fast = new ListNode(-1);
+        slow = pHead;
+        fast = pHead;
+
+        while(fast != null && fast.next != null) {
+            stack.push(slow.val);
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if(fast != null) {
+            slow = slow.next;
+        }
+
+        while(slow != null) {
+            if(slow.val != stack.pop()) {
+                return false;
+            }
+            slow = slow.next;
+        }
+        return true;
+    }
+}
+```
+
+
+
+
+
+
 
 
 

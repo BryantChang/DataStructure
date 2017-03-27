@@ -185,6 +185,70 @@ public class Palindrome {
 ```
 
 
+### 5、输入一个链表，反转链表后，输出链表的所有元素。
+
+```
+解题思路：使用三个游标节点进行控制，核心是提前标记到当前节点的next域。
+```
+
+```java
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Solution {
+    public ListNode ReverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode next = null;
+        while(head != null) {
+            next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
+        }
+        return pre;
+    }
+}
+```
+
+
+### 6、输入一个链表，从尾到头打印链表每个节点的值。
+
+```
+解题思路：利用ArrayList中的add函数特点(每次添加时如果元素已经存在，则剩余的元素向后移动)
+```
+
+```java
+/**
+*    public class ListNode {
+*        int val;
+*        ListNode next = null;
+*
+*        ListNode(int val) {
+*            this.val = val;
+*        }
+*    }
+*
+*/
+import java.util.ArrayList;
+public class Solution {
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+       ArrayList list = new ArrayList<Integer>();
+       while(listNode != null) {
+           list.add(0, listNode.val);
+           listNode = listNode.next;
+       }
+       return list;
+    }
+}
+```
+
+
 
 
 

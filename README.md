@@ -324,11 +324,53 @@ public class Solution {
 }
 ```
 
+### 9、输入一个链表，输出该链表中倒数第k个结点。
 
+```
+解题思路：使用快慢指针的方法，让前面的指针先走k个节点，如果链表长度小于k则会遇到空直接返回null，当前面的指针完成遍历时，快慢指针同时向前移动，当前面的指针走到链表尾部时，后面指针所指的位置正好为倒数第k个元素。
+```
 
+```java
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
 
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Solution {
+    public ListNode FindKthToTail(ListNode head,int k) {
+        ListNode node = new ListNode(0);
+        ListNode nodeK = new ListNode(0);
+        node = head;
+        nodeK = head;
+        if(head == null || k == 0) {
+            return null;
+        }
+        for(int i = 1; i < k; i++) {
+            if(nodeK.next != null) {
+                nodeK = nodeK.next;
+            }else {
+                return null;
+            }
+            
+        }
+        while(nodeK.next != null) {
+            node = node.next;
+            nodeK = nodeK.next;
+        }
+        return node;
+    }
+}
+```
 
+### 10、输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
 
+```
+解题思路：首先是递归思路，首先是当有一条链表为空时
+```
 
 
 

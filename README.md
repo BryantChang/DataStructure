@@ -251,9 +251,10 @@ public class Solution {
 ### 7、输入两个链表，找出它们的第一个公共结点
 
 ```
-解题思路
+解题思路:首先确定两个链表具有公共节点的特征，如下图所示，解决方案可以为设置两个游标指针，不停地在两个链表交替遍历，两个游标每次同时向后移动一个节点
 ```
 
+![image](https://raw.githubusercontent.com/BryantChang/DataStructure/master/imgs/common_node.png)
 
 
 

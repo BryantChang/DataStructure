@@ -283,6 +283,53 @@ public class Solution {
 }
 ```
 
+### 8、在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
+
+```
+解题思路：为了统一化操作，设立头结点，并设两个游标节点，前驱节点和当前节点，前驱节点首先指向头结点，当前节点初始指向给定链表头pHead，当当前节点的值与当前节点下一个节点的值相同时，游标指针向后遍历，找到第一个与当前值不相等的节点，删除中间的节点，进行下面的遍历。
+```
+
+
+```java
+/*
+ public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+*/
+public class Solution {
+    public ListNode deleteDuplication(ListNode pHead) {
+        ListNode first = new ListNode(-1);//头结点
+        first.next = pHead;
+        ListNode p = pHead;
+        ListNode pre = first;
+        while(p != null && p.next != null) {
+            if(p.val == p.next.val) {
+                int val = p.val;
+                while(p != null && p.val == val) {
+                    p = p.next;
+                }
+                pre.next = p;
+            }else {
+                pre = p;
+                p = p.next;
+            }
+        }
+        return first.next;
+    }
+}
+```
+
+
+
+
+
+
+
 
 
 

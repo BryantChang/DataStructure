@@ -251,12 +251,37 @@ public class Solution {
 ### 7、输入两个链表，找出它们的第一个公共结点
 
 ```
-解题思路:首先确定两个链表具有公共节点的特征，如下图所示，解决方案可以为设置两个游标指针，不停地在两个链表交替遍历，两个游标每次同时向后移动一个节点
+解题思路:首先确定两个链表具有公共节点的特征，如下图所示，解决方案可以为设置两个游标指针，不停地在两个链表交替遍历，两个游标每次同时向后移动一个节点，若非公共部分长度相同，则移动非公共部分个数的节点就能够找到两个链表的公共节点，若非公共部分不同，即两个链表的长度不相同时，则两个指针会不同时到达末尾，则会变为快慢指针的追击问题。因此此方法最终会找到俩个链表的公共节点。
 ```
 
 ![image](https://raw.githubusercontent.com/BryantChang/DataStructure/master/imgs/common_node.png)
 
+```java
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
 
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Solution {
+    public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
+        ListNode node1 = new ListNode(-1);
+        ListNode node2 = new ListNode(-1);
+
+        node1 = pHead1;
+        node2 = pHead2;
+
+        while(node1 != node2) {
+            node1 = (node1 == null ? pHead2 : node1.next);
+            node2 = (node2 == null ? pHead1 : node2.next);
+        }
+        return node1;
+    }
+}
+```
 
 
 

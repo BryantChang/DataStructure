@@ -369,8 +369,106 @@ public class Solution {
 ### 10、输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
 
 ```
-解题思路：首先是递归思路，首先是当有一条链表为空时
+解题思路：首先是递归思路，首先是当有一条链表为空时,返回另外一个链表。当链表不为空是可以理解为其中一个节点和后半部分，后半部分是除去该节点的链表部分和另一个链表递归的结果，当前节点的next域指向,递归的节点，返回这个节点所在的链表。
+非递归思路：首先找到第一个节点，第一个节点是两个链表的头结点中较小的节点，然后进行合并。
 ```
+
+```java
+//递归思路
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Solution {
+    public ListNode Merge(ListNode list1,ListNode list2) {
+        if(list1 == null) {
+            return list2;
+        }
+        if(list2 == null) {
+            return list1;
+        }
+        if(list1.val <= list2.val) {
+            list1.next = Merge(list1.next, list2);
+            return list1;
+        }else {
+            list2.next = Merge(list1, list2.next);
+            return list2;
+        }
+    }
+}
+```
+
+
+
+```java
+
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Solution {
+    public ListNode Merge(ListNode list1,ListNode list2) {
+        ListNode mergeHead = new ListNode(-1);
+        ListNode pre = new ListNode(-1);
+        ListNode cur = new ListNode(-1);
+
+        //边界条件判定（有一个链表为空，直接返回另一个）
+        if(list1 == null) {
+            return list2;
+        }
+        if(list2 == null) {
+            return list1;
+        }
+
+        //用两个链表中较小的头结点作为合并后的头结点
+        if(list1.val <= list2.val) {
+            mergeHead = list1;
+            list1 = list1.next;
+        }else {
+            mergeHead = list2;
+            list2 = list2.next;
+        }
+
+        cur = mergeHead;
+
+        while(list1 != null && list2 != null) {
+            if(list1.val <= list2.val) {
+                cur.next = list1;
+                list1 = list1.next;
+                cur = cur.next;
+            }else {
+                cur.next = list2;
+                list2 = list2.next;
+                cur = cur.next;
+            }
+        }
+        //连接较长的链表尾部
+        if(list1 == null) {
+            cur.next = list2;
+        }
+        if(list2 == null) {
+            cur.next = list1;
+        }
+        return mergeHead;
+    }
+}
+```
+
+
+
+
+
+
 
 
 
